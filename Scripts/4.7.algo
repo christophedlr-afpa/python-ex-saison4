@@ -6,6 +6,7 @@ clientDLicense: numérique
 clientSeniority: numérique
 clientAccident: numérique
 clientTarif: Chaîne
+clientAccepted: Booléen
 
 DEBUT
     Ecrire "Quel est votre âge : "
@@ -24,7 +25,13 @@ DEBUT
         SI clientDLicense est inférieur ou égale à 2 ans
             clientTarif = "rouge"
         SINON SI clientDLicense est supérieur à 2 ans
-            clientTarif = "orange"
+            SI clientAccident est égale à 0
+                clientTarif = "orange"
+            SINON SI clientAccident est égale à 1
+                clientTarif = "rouge"
+            SINON
+                Ecrire "On veut pas de vous ici, désolé !"
+                clientAccepted = FAUX
         SINON
             Ecrire "On veut pas de vous ici, désolé !"
         FIN IS
@@ -36,6 +43,7 @@ DEBUT
                 clientTarif = "rouge"
             SINON
                 Ecrire "On veut pas de vous ici, désolé !"
+                clientAccepted = FAUX
             FIN SI
         SINON
             SI clientAccident est égale à 0
@@ -46,10 +54,12 @@ DEBUT
                 clientTarif = "rouge"
             SINON
                 Ecrire "On veut pas de vous ici, désolé !"
+                clientAccepted = FAUX
             FIN SI
         FIN SI
     SINON
         Ecrire "On veut pas de vous ici, désolé !"
+        clientAccepted = FAUX
     FIN SI
 
     SI clientSeniority est supérieur à 5
@@ -62,7 +72,7 @@ DEBUT
         FIN SI
     FIN SI
 
-    Ecrire "Votre tarif est : "&clientTarif
+    Ecrire "Votre tarif prévu est : "&clientTarif
 FIN
 
 FIN ex-4.7
